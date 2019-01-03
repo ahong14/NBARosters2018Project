@@ -1,0 +1,21 @@
+#logo{
+    height:60px;
+    width:70px;
+}
+
+.nav-wrapper{
+    background-color: white;
+}
+
+.nav-wrapper ul{
+    width: 100vw;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+li{
+    color: black;
+}
+
+
