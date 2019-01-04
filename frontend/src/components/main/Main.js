@@ -3,6 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../main/Main.css";
 import 'materialize-css/dist/css/materialize.min.css';
 import {Carousel} from 'react-responsive-carousel';
+import SearchBar from '../search/SearchBar';
 
 //images for carousel
 import image1 from '../images/image1.jpg';
@@ -31,6 +32,7 @@ class Main extends Component{
                          <img  src = {image3} alt = "image3"/> 
                      </div>
                  </Carousel> 
+                 <SearchBar/>
             </div>
         );
     }

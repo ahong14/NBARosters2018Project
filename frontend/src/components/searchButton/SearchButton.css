@@ -1,0 +1,9 @@
+#searchButton{
+    display:flex;
+    justify-content: center;
+ }
+ 
+ #search{
+     align-self: center;
+ }
+ 
