@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NavbarList from '../navbarList/NavbarList';
-import header from '../header/Header.css';
+import '../header/Header.css';
 
 import nbaLogo from '../team_logos/nbalogo.jpg';
 
