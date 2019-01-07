@@ -1,0 +1,16 @@
+.playerCard{
+    width:400px;
+}
+
+.cardImage{
+    width: 350px;
+}
+
+.cardImage img{
+    width: 100%;
+}
+
+.card-content{
+    text-align: center;
+}
+

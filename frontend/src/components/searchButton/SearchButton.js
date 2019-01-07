@@ -1,4 +1,5 @@
 import React , {Component} from 'react';
+import '../searchButton/SearchButton.css';
 
 //pass down click props from SearchBar component
 //use click function to obtain and clear search query

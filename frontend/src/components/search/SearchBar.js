@@ -1,7 +1,9 @@
 import React , {Component} from 'react';
 import axios from 'axios';
 import { IoIosSearch } from "react-icons/io";
+import {Grid, Card} from 'semantic-ui-react';
 import SearchButton from '../searchButton/SearchButton';
+import Player from '../playerCard/Player';
 
 
 import '../search/SearchBar.css'; 
@@ -10,7 +12,7 @@ import '../search/SearchBar.css';
 //state of search bar is current search query in text input
 //changeSearchValue changes state of search bar to search query that was typed
 //ref references the value of input to prop this.search
-//onchange executes changeSearchValue to change state of search bar
+//onChange executes changeSearchValue to change state of search bar
 //initialize constructor to pass method to other component
 
 class SearchBar extends Component{
@@ -18,7 +20,8 @@ class SearchBar extends Component{
     constructor(props){
         super(props);
         this.state = {
-            searchQuery: ''
+            searchQuery: '',
+            results: []
         };
         this.changeSearchValue = this.changeSearchValue.bind(this);
         this.searchClicked = this.searchClicked.bind(this);
@@ -32,7 +35,8 @@ class SearchBar extends Component{
     }
 
     //set state to empty string
-    //TODO: pass search query value to backend
+    //pass search query value to backend
+    //set state of results from backend
     searchClicked(){
         console.log(this.state.searchQuery);
         axios.get('http://localhost:8080/players/searchPlayers', {
@@ -42,18 +46,27 @@ class SearchBar extends Component{
         }).then(res => {
             console.log(res);
             this.setState({
-                searchQuery: ''
+                searchQuery: '',
+                results: res.data
             });
         });
     }
 
     render(){
+
+        const players = this.state.results.map(result => {
+            return <Player key = {result._id} playerImage = {result.imgURL} playerName = {result.name} position = {result.pos} college = {result.college}/>
+        });
+
         return(
             <div>
                 <form id = "searchBar">
                     <input id = "searchInput" placeholder = "Search player.." autoComplete = "off" ref = {input => this.search = input} onChange = {this.changeSearchValue}/>
                 </form>
                 <SearchButton click = {this.searchClicked}/>
+                <div className = "row" id = "searchResults">
+                    {players} 
+                </div>
             </div>
         );
     }    
