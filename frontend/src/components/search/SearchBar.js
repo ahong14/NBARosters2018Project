@@ -21,10 +21,34 @@ class SearchBar extends Component{
         super(props);
         this.state = {
             searchQuery: '',
-            results: []
+            results: [],
+            teams:{}
         };
         this.changeSearchValue = this.changeSearchValue.bind(this);
         this.searchClicked = this.searchClicked.bind(this);
+    }
+
+    //after component has been rendered, get team list
+    //map TID to team names, region + name "Atlanta Hawks"
+    //TID 0 maps to "Atlanta Hawks"
+    componentDidMount(){
+        axios.get('http://localhost:8080/teams')
+            .then(res => {
+                //API Response
+                var teamData = res.data;
+                console.log(teamData);
+                //Current team object
+                var currentTeamObject = {};
+
+                for(let i =0; i< teamData.length; i++){
+                    var currentTeam = "";
+                    currentTeam = teamData[i].region + " " + teamData[i].name;
+                    currentTeamObject[teamData[i].tid] = currentTeam 
+                    this.setState({
+                        teams: currentTeamObject
+                    })
+                }
+            })
     }
 
     //change state of search query
@@ -55,13 +79,14 @@ class SearchBar extends Component{
     render(){
 
         const players = this.state.results.map(result => {
-            return <Player key = {result._id} playerImage = {result.imgURL} playerName = {result.name} position = {result.pos} college = {result.college}/>
+            var currentTid = result.tid;
+            return <Player key = {result._id} playerImage = {result.imgURL} playerName = {result.name} teamName = {this.state.teams[result.tid]} position = {result.pos} college = {result.college} height = {result.hgt} weight = {result.weight}/>
         });
 
         return(
             <div>
                 <form id = "searchBar">
-                    <input id = "searchInput" placeholder = "Search player.." autoComplete = "off" ref = {input => this.search = input} onChange = {this.changeSearchValue}/>
+                    <input id = "searchInput" placeholder = "Search player by name, college, or position..." autoComplete = "off" ref = {input => this.search = input} onChange = {this.changeSearchValue}/>
                 </form>
                 <SearchButton click = {this.searchClicked}/>
                 <div className = "row" id = "searchResults">

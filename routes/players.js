@@ -13,9 +13,11 @@ router.get('/', (req,resp,next) => {
 });
 
 //search players based on search query
+//regex, match any string
+//options i, case insensitive
 router.get('/searchPlayers', (req,resp,next) => {
     var searchQuery = req.query.search;
-    player.find({$or:[{'name': {"$regex": searchQuery }}, {'college': {"$regex": searchQuery }}, {'position': {"$regex": searchQuery }}]}, (err, players)=>{
+    player.find({$or:[{'name': {"$regex": searchQuery, $options:'i' }}, {'college': {"$regex": searchQuery, $options:'i' }}, {'position': {"$regex": searchQuery, $options:'i' }}]}, (err, players)=>{
         //if error with database
         if(err){
             resp.status(400).send("error with database");

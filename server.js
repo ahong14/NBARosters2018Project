@@ -4,6 +4,7 @@ var cors = require('cors');
 var mongoose = require('mongoose');
 var router = express.Router();
 var players = require('./routes/players');
+var teams = require('./routes/teams');
 
 //connect mongoose database
 mongoose.connect("mongodb://ahong14:6816782a@ds147344.mlab.com:47344/books");
@@ -19,6 +20,7 @@ app.use(cors());
 
 //routes
 app.use('/players', players);
+app.use('/teams', teams);
 
 //listen to requests
 var PORT = process.env.PORT || 8080;
