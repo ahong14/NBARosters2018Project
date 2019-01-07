@@ -14,8 +14,8 @@ mongoose.connection.on('error', function(error) {
 //setup express app
 var app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
-
 
 //routes
 app.use('/players', players);

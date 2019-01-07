@@ -8,7 +8,7 @@ import SearchBar from '../search/SearchBar';
 //images for carousel
 import image1 from '../images/image1.jpg';
 import image2 from '../images/image2.jpg';
-import image3 from '../images/image3.jpg';
+import image3 from '../images/image3.jpeg';
 
 //setup main landing page with image carousel
 //search bar placed below
@@ -19,7 +19,7 @@ class Main extends Component{
         return(
             <div>
                 <h1 id = "title"> NBA 2018 Rosters </h1>
-                <Carousel showThumbs={false} showArrows={false} showStatus={false} autoPlay = {true} infiniteLoop = {true}>
+                <Carousel showThumbs={false} showArrows={false} showStatus={false} autoPlay = {false} infiniteLoop = {true}>
                      <div className = "imageCarousel">
                          <img  src = {image1} alt = "image1"/> 
                      </div>

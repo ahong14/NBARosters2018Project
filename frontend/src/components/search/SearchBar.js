@@ -1,6 +1,8 @@
 import React , {Component} from 'react';
+import axios from 'axios';
 import { IoIosSearch } from "react-icons/io";
 import SearchButton from '../searchButton/SearchButton';
+
 
 import '../search/SearchBar.css'; 
 //search bar source from https://dev.to/sage911/how-to-write-a-search-component-with-suggestions-in-react-d20
@@ -26,15 +28,22 @@ class SearchBar extends Component{
     changeSearchValue(){
         this.setState({
             searchQuery: this.search.value
-        })
+        });
     }
 
     //set state to empty string
     //TODO: pass search query value to backend
     searchClicked(){
         console.log(this.state.searchQuery);
-        this.setState({
-            searchQuery: ''
+        axios.get('http://localhost:8080/players/searchPlayers', {
+            params: {
+                search: this.state.searchQuery
+            }
+        }).then(res => {
+            console.log(res);
+            this.setState({
+                searchQuery: ''
+            });
         });
     }
 
@@ -42,7 +51,7 @@ class SearchBar extends Component{
         return(
             <div>
                 <form id = "searchBar">
-                    <input id = "searchInput" placeholder = "Search player.." ref = {input => this.search = input} onChange = {this.changeSearchValue}/>
+                    <input id = "searchInput" placeholder = "Search player.." autoComplete = "off" ref = {input => this.search = input} onChange = {this.changeSearchValue}/>
                 </form>
                 <SearchButton click = {this.searchClicked}/>
             </div>
