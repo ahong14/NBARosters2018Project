@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import NavbarList from '../navbarList/NavbarList';
 import '../header/Header.css';
 
@@ -13,7 +14,7 @@ class Header extends Component{
         return(
             <nav>
                 <div id = "mainNav" className = "nav-wrapper">
-                    <a href = "#" className = "brand-logo"> <img id = "logo" src = {nbaLogo}/>  </a>
+                    <Link to = "/" className = "brand-logo"> <img id = "logo" src = {nbaLogo}/>  </Link>
                     <ul className = "left hide-on-med-and-down"> 
                         <NavbarList division = "Pacific"/>
                         <NavbarList division = "Northwest"/>

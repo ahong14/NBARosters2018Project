@@ -1,4 +1,4 @@
-#searchBar{
+.searchBar{
     width: 50vw;
     margin:auto;
     margin-top: 10px;
@@ -10,7 +10,7 @@
     align-content: center;
 }
 
-#searchInput{
+.searchInput{
     font-weight: bold;
     color: black;
 }
