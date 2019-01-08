@@ -17,9 +17,9 @@ import image3 from '../images/image3.jpeg';
 class Main extends Component{
     render(){
         return(
-            <div>
+            <div id = "mainCarousel">
                 <h1 id = "title"> NBA 2018 Rosters </h1>
-                <Carousel showThumbs={false} showArrows={false} showStatus={false} autoPlay = {false} infiniteLoop = {true}>
+                <Carousel  showThumbs={false} showArrows={false} showStatus={false} autoPlay = {false} infiniteLoop = {true}>
                      <div className = "imageCarousel">
                          <img  src = {image1} alt = "image1"/> 
                      </div>

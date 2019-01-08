@@ -16,16 +16,49 @@ router.get('/', (req,resp,next) => {
 //regex, match any string
 //options i, case insensitive
 router.get('/searchPlayers', (req,resp,next) => {
-    var searchQuery = req.query.search;
-    player.find({$or:[{'name': {"$regex": searchQuery, $options:'i' }}, {'college': {"$regex": searchQuery, $options:'i' }}, {'position': {"$regex": searchQuery, $options:'i' }}]}, (err, players)=>{
-        //if error with database
-        if(err){
-            resp.status(400).send("error with database");
-        }
 
-        //send response of matching players
-        resp.status(200).json(players);
-    });
+    var playerQuery = req.query.playerSearch;
+    var collegeQuery = req.query.collegeSearch;
+
+
+    //search players based on name and college
+    if(playerQuery && collegeQuery){
+        player.find({$and:[{'name': {"$regex": playerQuery, $options:'i' }}, {'college': {"$regex": collegeQuery, $options:'i' }}]}, (err, players)=>{
+            //if error with database
+            if(err){
+                resp.status(400).send("error with database");
+            }
+    
+            //send response of matching players
+            resp.status(200).json(players);
+        });
+    }
+
+    //search based just on player name
+    else if (playerQuery){
+        player.find({'name': {"$regex": playerQuery, $options:'i' }} , (err, players)=>{
+            //if error with database
+            if(err){
+                resp.status(400).send("error with database");
+            }
+    
+            //send response of matching players
+            resp.status(200).json(players);
+        });
+    }
+
+    //search based on college 
+    else if (collegeQuery){
+        player.find({'college': {"$regex": collegeQuery, $options:'i' }} , (err, players)=>{
+            //if error with database
+            if(err){
+                resp.status(400).send("error with database");
+            }
+    
+            //send response of matching players
+            resp.status(200).json(players);
+        });
+    }
 });
 
 module.exports = router;

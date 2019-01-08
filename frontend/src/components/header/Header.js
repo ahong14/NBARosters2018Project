@@ -12,7 +12,7 @@ class Header extends Component{
     render(){
         return(
             <nav>
-                <div className = "nav-wrapper">
+                <div id = "mainNav" className = "nav-wrapper">
                     <a href = "#" className = "brand-logo"> <img id = "logo" src = {nbaLogo}/>  </a>
                     <ul className = "left hide-on-med-and-down"> 
                         <NavbarList division = "Pacific"/>

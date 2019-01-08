@@ -20,7 +20,8 @@ class SearchBar extends Component{
     constructor(props){
         super(props);
         this.state = {
-            searchQuery: '',
+            playerQuery: '',
+            collegeQuery: '',
             results: [],
             teams:{}
         };
@@ -40,13 +41,18 @@ class SearchBar extends Component{
                 //Current team object
                 var currentTeamObject = {};
 
+
+                ///for each team, add team name to teams object
+                //when last team, set state
                 for(let i =0; i< teamData.length; i++){
                     var currentTeam = "";
                     currentTeam = teamData[i].region + " " + teamData[i].name;
-                    currentTeamObject[teamData[i].tid] = currentTeam 
-                    this.setState({
-                        teams: currentTeamObject
-                    })
+                    currentTeamObject[teamData[i].tid] = currentTeam;
+                    if(i == teamData.length -1){
+                        this.setState({
+                            teams: currentTeamObject
+                        })
+                    } 
                 }
             })
     }
@@ -54,7 +60,8 @@ class SearchBar extends Component{
     //change state of search query
     changeSearchValue(){
         this.setState({
-            searchQuery: this.search.value
+            playerQuery: this.searchPlayer.value,
+            collegeQuery: this.searchCollege.value
         });
     }
 
@@ -62,15 +69,19 @@ class SearchBar extends Component{
     //pass search query value to backend
     //set state of results from backend
     searchClicked(){
-        console.log(this.state.searchQuery);
         axios.get('http://localhost:8080/players/searchPlayers', {
             params: {
-                search: this.state.searchQuery
+                playerSearch: this.state.playerQuery,
+                collegeSearch: this.state.collegeQuery
             }
         }).then(res => {
-            console.log(res);
+            if(res.data.length === 0){
+                alert("No results");
+            }
+
             this.setState({
-                searchQuery: '',
+                playerQuery: '',
+                collegeQuery: '',
                 results: res.data
             });
         });
@@ -85,10 +96,16 @@ class SearchBar extends Component{
 
         return(
             <div>
-                <form id = "searchBar">
-                    <input id = "searchInput" placeholder = "Search player by name, college, or position..." autoComplete = "off" ref = {input => this.search = input} onChange = {this.changeSearchValue}/>
+                <form className = "searchBar">
+                    <input className = "searchInput" placeholder = "Search player by name..." autoComplete = "off" ref = {input => this.searchPlayer = input} onChange = {this.changeSearchValue}/>
                 </form>
+
+                <form className = "searchBar">
+                    <input className = "searchInput" placeholder = "Search player by college..." autoComplete = "off" ref = {input => this.searchCollege = input} onChange = {this.changeSearchValue}/>
+                </form>
+
                 <SearchButton click = {this.searchClicked}/>
+
                 <div className = "row" id = "searchResults">
                     {players} 
                 </div>

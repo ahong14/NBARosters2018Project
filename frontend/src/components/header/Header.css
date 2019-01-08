@@ -1,6 +1,6 @@
 #logo{
     height:60px;
-    width:70px;
+    width:100px;
 }
 
 .nav-wrapper{
@@ -16,6 +16,10 @@
 
 li{
     color: black;
+}
+
+#mainNav{
+    background-color: lightgray;
 }
 
 

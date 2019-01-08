@@ -6,7 +6,7 @@ class NavbarList extends Component{
     render(){
         return(
             <li>
-                 {this.props.division} 
+                 <strong> {this.props.division} </strong>
             </li>
         );
     }
