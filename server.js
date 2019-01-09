@@ -2,9 +2,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
+var path = require("path");
 var router = express.Router();
 var players = require('./routes/players');
 var teams = require('./routes/teams');
+
 
 //connect mongoose database
 mongoose.connect("mongodb://ahong14:6816782a@ds147344.mlab.com:47344/books");
