@@ -16,12 +16,11 @@ router.get('/', (req,resp,next) => {
 //regex, match any string
 //options i, case insensitive
 router.get('/searchPlayers', (req,resp,next) => {
-
     var playerQuery = req.query.playerSearch;
     var collegeQuery = req.query.collegeSearch;
 
-
     //search players based on name and college
+    //college string must match
     if(playerQuery && collegeQuery){
         player.find({$and:[{'name': {"$regex": playerQuery, $options:'i' }}, {'college': {"$regex": '^' + collegeQuery + '$', $options:'i' }}]}, (err, players)=>{
             //if error with database

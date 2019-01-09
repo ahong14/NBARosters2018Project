@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import NavbarList from '../navbarList/NavbarList';
 import '../header/Header.css';
-
 import nbaLogo from '../team_logos/nbalogo.jpg';
 
-//header component consists of navbar
+//header component consists of fixed navbar
 //navbar contains page logo and ul
 //ul consists of NavbarList components
+//clicking logo redirects back to home page
 
 class Header extends Component{
     render(){

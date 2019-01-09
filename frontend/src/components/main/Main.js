@@ -13,7 +13,6 @@ import image3 from '../images/image3.jpeg';
 //setup main landing page with image carousel
 //search bar placed below
 
-
 class Main extends Component{
     render(){
         return(

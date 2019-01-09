@@ -5,11 +5,14 @@ import Main from './main/Main';
 import TeamPage from '../components/teamPages/TeamPage';
 
 
+//main App component
+//react router used when clicking different nav links
+//each route renders its own team page for each division
+//rosters for teams in matching division are rendered
+
 class App extends Component {
 
   render() {
-
-  
     return(
       <Router>
         <div>

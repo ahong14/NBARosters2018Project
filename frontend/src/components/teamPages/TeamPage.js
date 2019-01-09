@@ -4,25 +4,26 @@ import TeamHeader from '../teamHeader/TeamHeader';
 import '../teamPages/TeamPage.css';
 
 class TeamPage extends Component{
-
     constructor(props){
         super(props);
         this.state = {
-            teams:{},
-            pacific: [9,12,13,23,25],
+            teams:{}, //object to map TID to team information
+            pacific: [9,12,13,23,25], //array of TIDs for pacific division
             northwest: [7, 17, 20, 24, 28],
             southwest: [6, 10, 14, 18, 26],
             central: [4, 5, 8, 11, 16],
             atlantic: [1, 2, 19, 22, 27],
             southeast: [0, 3, 15, 21, 29],
-            teamComponents: []
+            teamComponents: [] //array of TeamHeader components to render
         };
-
         this.renderDivision = this.renderDivision.bind(this);
     }
 
+    //based on which route clicked, render TeamHeaders for specific division
     renderDivision(division){
         var teams = [];
+        //5 teams in each divison
+        //iterate each array based on divison to obtain TIDs
         switch(division){
             case 'Pacific Division':
                 for (let i = 0; i< 5; i++){
@@ -77,12 +78,13 @@ class TeamPage extends Component{
         }
     }
 
+    //get list of teams
     componentDidMount(){
-        axios.get('http://localhost:8080/teams')
+        const apiURL = 'http://localhost:8080/teams'
+        axios.get(apiURL)
             .then(res => {
                 //API Response
                 var teamData = res.data;
-                console.log(teamData);
                 //Current team object
                 var currentTeamObject = {};
 
@@ -106,26 +108,22 @@ class TeamPage extends Component{
                         this.setState({
                             teams: currentTeamObject
                         });
-
+                        //render TeamHeaders based on current division
                         let teams = this.renderDivision(this.props.divisionName);
+                        //set state of team components to matching teams
                         this.setState({
                             teamComponents: teams
                         });
-
                     } 
                 }
             })
     }
-
-
-
 
     render(){
         const renderTeams = this.state.teamComponents;
         return(
             <div>
                 <h1 className = "divisionTitle"> {this.props.divisionName} </h1>
-
                 <div>
                     {renderTeams}
                 </div>

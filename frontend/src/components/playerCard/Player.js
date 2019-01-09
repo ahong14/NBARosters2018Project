@@ -1,7 +1,8 @@
 import React , {Component} from 'react';
 import '../playerCard/Player.css';
 
-
+//player component contains player image and player info
+//using MaterializeCSS cards
 class Player extends Component{
     render(){
         return(

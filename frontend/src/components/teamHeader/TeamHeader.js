@@ -3,17 +3,22 @@ import Player from '../playerCard/Player';
 import axios from 'axios';
 import '../teamHeader/TeamHeader.css';
 
+
+//team header for each division
+//each team header consists of player cards that are on team's roster
+//props are passed from TeamPage component
 class TeamHeader extends Component{
     constructor(props){
         super(props);
         this.state = {
-            results: []
+            results: [] //API response of players for current team
         }
     };
 
     //get list of players for this team
     componentDidMount(){
-        axios.get('http://localhost:8080/players/searchByTeam',{
+        const apiURL = 'http://localhost:8080/players/searchByTeam';
+        axios.get(apiURL,{
             params:{
                 tid: this.props.teamID
             }
@@ -39,7 +44,6 @@ class TeamHeader extends Component{
                 <div className = "row">
                    {players}
                 </div>
-
             </div>
         );
     }
