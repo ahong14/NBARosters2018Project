@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 //serve react files
-app.use(express.static(path.join(__dirname, 'frontend/')));
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 //routes
 app.use('/players', players);
