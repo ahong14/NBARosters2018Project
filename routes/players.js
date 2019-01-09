@@ -23,7 +23,7 @@ router.get('/searchPlayers', (req,resp,next) => {
 
     //search players based on name and college
     if(playerQuery && collegeQuery){
-        player.find({$and:[{'name': {"$regex": playerQuery, $options:'i' }}, {'college': {"$regex": collegeQuery, $options:'i' }}]}, (err, players)=>{
+        player.find({$and:[{'name': {"$regex": playerQuery, $options:'i' }}, {'college': {"$regex": '^' + collegeQuery + '$', $options:'i' }}]}, (err, players)=>{
             //if error with database
             if(err){
                 resp.status(400).send("error with database");
@@ -49,7 +49,7 @@ router.get('/searchPlayers', (req,resp,next) => {
 
     //search based on college 
     else if (collegeQuery){
-        player.find({'college': {"$regex": collegeQuery, $options:'i' }} , (err, players)=>{
+        player.find({'college': {"$regex": '^' + collegeQuery + '$', $options:'i' }} , (err, players)=>{
             //if error with database
             if(err){
                 resp.status(400).send("error with database");
@@ -59,6 +59,20 @@ router.get('/searchPlayers', (req,resp,next) => {
             resp.status(200).json(players);
         });
     }
+});
+
+
+//get players based on TID
+router.get('/searchByTeam', (req,resp,next)=>{
+    var tid = Number(req.query.tid);
+    player.find({'tid': tid}, (err, players)=>{
+        //if error with database
+        if(err){
+            resp.status(400).send("error with database");
+        }
+        //send response of matching players
+        resp.status(200).json(players);
+    });
 });
 
 module.exports = router;

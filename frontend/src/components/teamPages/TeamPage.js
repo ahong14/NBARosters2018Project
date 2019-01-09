@@ -3,9 +3,6 @@ import axios from 'axios';
 import TeamHeader from '../teamHeader/TeamHeader';
 import '../teamPages/TeamPage.css';
 
-
-//pacific tid: warriors-9, clippers -12, lakers-13, phoenix-23, sacramento-25
-
 class TeamPage extends Component{
 
     constructor(props){
@@ -29,52 +26,53 @@ class TeamPage extends Component{
         switch(division){
             case 'Pacific Division':
                 for (let i = 0; i< 5; i++){
-                    let currentTID = this.state.pacific[i];
+                    let currentTID = Number(this.state.pacific[i]);
                     let currentName = this.state.teams[currentTID].name;
                     let currentLogo = this.state.teams[currentTID].source;
-                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} />);
+                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} teamID = {currentTID} />);
                 }
                 return teams;
+
             case 'Northwest Division':
                 for (let i = 0; i< 5; i++){
                     let currentTID = this.state.northwest[i];
                     let currentName = this.state.teams[currentTID].name;
                     let currentLogo = this.state.teams[currentTID].source;
-                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} />);
+                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} teamID = {currentTID} />);
                 }
-            return teams;
+                return teams;
             case 'Southwest Division':
                 for (let i = 0; i< 5; i++){
                     let currentTID = this.state.southwest[i];
                     let currentName = this.state.teams[currentTID].name;
                     let currentLogo = this.state.teams[currentTID].source;
-                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} />);
+                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} teamID = {currentTID} />);
                 }
-            return teams;
+                return teams;
             case 'Central Division':
                 for (let i = 0; i< 5; i++){
                     let currentTID = this.state.central[i];
                     let currentName = this.state.teams[currentTID].name;
                     let currentLogo = this.state.teams[currentTID].source;
-                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} />);
+                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} teamID = {currentTID} />);
                 }
-            return teams;
+                return teams;
             case 'Southeast Division':
                 for (let i = 0; i< 5; i++){
                     let currentTID = this.state.southeast[i];
                     let currentName = this.state.teams[currentTID].name;
                     let currentLogo = this.state.teams[currentTID].source;
-                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} />);
+                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} teamID = {currentTID} />);
                 }
-            return teams;
+                return teams;
             case 'Atlantic Division':
                 for (let i = 0; i< 5; i++){
                     let currentTID = this.state.atlantic[i];
                     let currentName = this.state.teams[currentTID].name;
                     let currentLogo = this.state.teams[currentTID].source;
-                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} />);
+                    teams.push(<TeamHeader teamLogo = {currentLogo} teamName = {currentName} teamID = {currentTID} />);
                 }
-            return teams;
+                return teams;
             default:
         }
     }
@@ -101,8 +99,6 @@ class TeamPage extends Component{
                     teamObject.source = teamData[i].imgURL;
 
                     var tid = teamData[i].tid;
-                    console.log("checking tid in initial call",tid);
-
                     //map team name to imgURL
                     currentTeamObject[tid] = teamObject;
                     //set state of teams to component

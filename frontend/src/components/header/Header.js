@@ -12,19 +12,21 @@ import nbaLogo from '../team_logos/nbalogo.jpg';
 class Header extends Component{
     render(){
         return(
-            <nav>
-                <div id = "mainNav" className = "nav-wrapper">
-                    <Link to = "/" className = "brand-logo"> <img id = "logo" src = {nbaLogo}/>  </Link>
-                    <ul className = "left hide-on-med-and-down"> 
-                        <NavbarList division = "Pacific"/>
-                        <NavbarList division = "Northwest"/>
-                        <NavbarList division = "Southwest"/>
-                        <NavbarList division = "Central"/>
-                        <NavbarList division = "Atlantic"/>
-                        <NavbarList division = "Southeast"/>
-                    </ul>
-                </div>
-            </nav>
+            <div className = "navbar-fixed">
+                <nav>
+                    <div id = "mainNav" className = "nav-wrapper">
+                        <Link to = "/" className = "brand-logo"> <img id = "logo" src = {nbaLogo}/>  </Link>
+                        <ul className = "left hide-on-med-and-down"> 
+                            <NavbarList division = "Pacific"/>
+                            <NavbarList division = "Northwest"/>
+                            <NavbarList division = "Southwest"/>
+                            <NavbarList division = "Central"/>
+                            <NavbarList division = "Atlantic"/>
+                            <NavbarList division = "Southeast"/>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
         );
     }
 }

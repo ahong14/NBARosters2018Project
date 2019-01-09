@@ -5,7 +5,7 @@ import '../playerCard/Player.css';
 class Player extends Component{
     render(){
         return(
-            <div className="card large playerCard col s3">
+            <div className="card playerCard col s3">
                 <div className="cardImage">
                     <img src= {this.props.playerImage}/>
                 </div>
