@@ -80,7 +80,8 @@ class TeamPage extends Component{
 
     //get list of teams
     componentDidMount(){
-        const apiURL = 'http://localhost:8080/teams'
+      //  const apiURL = 'http://localhost:8080/teams';
+        const apiURL = 'http://nbarosters2018.herokuapp.com/teams';
         axios.get(apiURL)
             .then(res => {
                 //API Response

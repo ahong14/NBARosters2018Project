@@ -25,7 +25,8 @@ class SearchBar extends Component{
     //map TID to team names, region + name "Atlanta Hawks"
     //TID 0 maps to "Atlanta Hawks"
     componentDidMount(){
-        const apiURL = 'http://localhost:8080/teams';
+        // const apiURL = 'http://localhost:8080/teams';
+        const apiURL = 'http://nbarosters2018.herokuapp.com/teams';
         axios.get(apiURL)
             .then(res => {
                 //API Response
@@ -63,7 +64,8 @@ class SearchBar extends Component{
     //pass search query value to backend
     //set state of results from backend
     searchClicked(){
-        const apiURL = 'http://localhost:8080/players/searchPlayers';
+        // const apiURL = 'http://localhost:8080/players/searchPlayers';
+        const apiURL = 'http://nbarosters2018.herokuapp.com/players/searchPlayers';
         axios.get(apiURL , {
             params: {
                 playerSearch: this.state.playerQuery,
