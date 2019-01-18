@@ -9,7 +9,7 @@ var teams = require('./routes/teams');
 
 
 //connect mongoose database
-mongoose.connect("mongodb://ahong14:6816782a@ds147344.mlab.com:47344/books");
+mongoose.connect("mongodb://ahong14:aa12345@ds147344.mlab.com:47344/books");
 mongoose.connection.on('error', function(error) {
     console.error('Database connection error:', error);
 });
