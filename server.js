@@ -24,8 +24,8 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 //routes
-app.use('/players', players);
-app.use('/teams', teams);
+app.use('/api/players', players);
+app.use('/api/teams', teams);
 
 //listen to requests
 var PORT = process.env.PORT || 8080;

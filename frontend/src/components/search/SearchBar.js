@@ -19,14 +19,14 @@ class SearchBar extends Component{
         };
         this.changeSearchValue = this.changeSearchValue.bind(this);
         this.searchClicked = this.searchClicked.bind(this);
+        this.handlePress = this.handlePress.bind(this);
     }
 
     //after component has been rendered, get team list via network call
     //map TID to team names, region + name "Atlanta Hawks"
     //TID 0 maps to "Atlanta Hawks"
     componentDidMount(){
-        // const apiURL = 'http://localhost:8080/teams';
-        const apiURL = 'http://nbarosters2018.herokuapp.com/teams';
+        const apiURL = '/api/teams';
         axios.get(apiURL)
             .then(res => {
                 //API Response
@@ -36,20 +36,29 @@ class SearchBar extends Component{
 
                 ///for each team, add team name to teams object
                 //when last team, set state
-                for(let i =0; i< teamData.length; i++){
+                //"region" + "team name" 
+                for(let i = 0; i < teamData.length; i++){
                     var currentTeam = "";
                     //construct team name, "Atlanta + Hawks"
                     currentTeam = teamData[i].region + " " + teamData[i].name;
-                    //map TID to team name
+
+                    //map TID to team name, 1 to Atlanta Hawks
                     currentTeamObject[teamData[i].tid] = currentTeam;
+                    
                     //if last team, set state of teams to currentTeamObject
-                    if(i == teamData.length -1){
+                    if(i === teamData.length -1){
                         this.setState({
                             teams: currentTeamObject
                         })
                     } 
                 }
             })
+
+        //attach event listener to determine if enter key was pressed
+        //when key is pressed in any of the search forms, execute handlePress function
+        const searchForms = this.refs.forms;
+        const addEvent = searchForms.addEventListener;
+        addEvent("keypress", this.handlePress, false);
     }
 
     //change state of search query for both player and college search
@@ -64,14 +73,14 @@ class SearchBar extends Component{
     //pass search query value to backend
     //set state of results from backend
     searchClicked(){
-        // const apiURL = 'http://localhost:8080/players/searchPlayers';
-        const apiURL = 'http://nbarosters2018.herokuapp.com/players/searchPlayers';
+        const apiURL = '/api/players/searchPlayers';
         axios.get(apiURL , {
             params: {
                 playerSearch: this.state.playerQuery,
                 collegeSearch: this.state.collegeQuery
             }
-        }).then(res => {
+        })
+        .then(res => {
             if(res.data.length === 0){
                 alert("No results");
             }
@@ -84,7 +93,16 @@ class SearchBar extends Component{
         });
     }
 
+    //handle search by pressing enter key
+    handlePress(event){
+        //if enter key was pressed, execute search        
+        if(event.key === 'Enter'){
+            event.preventDefault();
+            this.searchClicked();
+        }
+    };
 
+    
     //changeSearchValue changes state of search bar to search query that was typed
     //two search bars, one for player name, one for college name
     //ref references the value of input to prop this.search
@@ -96,7 +114,7 @@ class SearchBar extends Component{
         });
 
         return(
-            <div>
+            <div ref = "forms">
                 <form className = "searchBar">
                     <input className = "searchInput" placeholder = "Search player by name..." autoComplete = "off" ref = {input => this.searchPlayer = input} onChange = {this.changeSearchValue}/>
                 </form>
