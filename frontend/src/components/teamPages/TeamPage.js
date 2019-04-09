@@ -24,6 +24,8 @@ class TeamPage extends Component{
         var teams = [];
         //5 teams in each divison
         //iterate each array based on divison to obtain TIDs
+        //extract team name, image source, and team ID from division array
+        //push results into an array for rendering
         switch(division){
             case 'Pacific Division':
                 for (let i = 0; i< 5; i++){
@@ -80,8 +82,7 @@ class TeamPage extends Component{
 
     //get list of teams
     componentDidMount(){
-      //  const apiURL = 'http://localhost:8080/teams';
-        const apiURL = 'http://nbarosters2018.herokuapp.com/teams';
+        const apiURL = '/api/teams';
         axios.get(apiURL)
             .then(res => {
                 //API Response
@@ -104,14 +105,18 @@ class TeamPage extends Component{
                     var tid = teamData[i].tid;
                     //map team name to imgURL
                     currentTeamObject[tid] = teamObject;
+
+                    //last team reached
                     //set state of teams to component
                     if(i === teamData.length -1){
                         this.setState({
                             teams: currentTeamObject
                         });
+
                         //render TeamHeaders based on current division
+                        //group teams based on matching TIDs within a division
                         let teams = this.renderDivision(this.props.divisionName);
-                        //set state of team components to matching teams
+                        //set state of team components to matching teams based on division name
                         this.setState({
                             teamComponents: teams
                         });

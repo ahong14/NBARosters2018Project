@@ -17,8 +17,7 @@ class TeamHeader extends Component{
 
     //get list of players for this team
     componentDidMount(){
-        // const apiURL = 'http://localhost:8080/players/searchByTeam';
-        const apiURL = 'http://nbarosters2018.herokuapp.com/players/searchByTeam';
+        const apiURL = '/api/players/searchByTeam';
         axios.get(apiURL,{
             params:{
                 tid: this.props.teamID
