@@ -27,6 +27,12 @@ app.use(express.static(path.join(__dirname, 'frontend/build')));
 app.use('/api/players', players);
 app.use('/api/teams', teams);
 
+//react refresh fix
+//fix react app crashing on refresh
+app.get('/*', (req,res) => {
+    res.sendFile(path.join(__dirname + '/frontend/build/index.html'))
+});
+
 //listen to requests
 var PORT = process.env.PORT || 8080;
 app.listen(PORT,function(){
